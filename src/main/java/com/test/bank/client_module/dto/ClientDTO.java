@@ -8,8 +8,6 @@ public class ClientDTO {
     private String phoneNumber;
     private String address;
 
-    private double creditSum;
-
     public ClientDTO() {
 
     }
