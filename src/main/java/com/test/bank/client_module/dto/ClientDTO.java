@@ -1,6 +1,6 @@
-package com.test.bank.user_module.dto;
+package com.test.bank.client_module.dto;
 
-public class UserDTO {
+public class ClientDTO {
     private Long id;
     private String firstName;
     private String middleName;
@@ -10,7 +10,7 @@ public class UserDTO {
 
     private double creditSum;
 
-    public UserDTO() {
+    public ClientDTO() {
 
     }
 }
