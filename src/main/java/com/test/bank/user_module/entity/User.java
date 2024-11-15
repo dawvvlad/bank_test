@@ -1,4 +1,4 @@
-package com.test.bank.entity;
+package com.test.bank.user_module.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

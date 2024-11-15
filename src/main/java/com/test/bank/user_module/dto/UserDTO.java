@@ -1,4 +1,4 @@
-package com.test.bank.dto;
+package com.test.bank.user_module.dto;
 
 public class UserDTO {
     private Long id;
