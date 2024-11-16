@@ -20,11 +20,19 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public Client find(Long id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Client.class, id);
     }
 
     @Override
     public List<Client> findAll() {
-        return List.of();
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Client", Client.class).list();
+    }
+
+    @Override
+    public void save(Client client) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(client);
     }
 }
