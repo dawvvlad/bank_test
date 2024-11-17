@@ -39,6 +39,7 @@ public class CreditApplication {
     private LocalDateTime date;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private ApplicationStatus status;
 
     @OneToOne(mappedBy = "creditApplication")

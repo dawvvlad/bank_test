@@ -22,7 +22,6 @@ public class CreditApplicationServiceImpl implements CreditApplicationService {
     }
 
     @Override
-    @Transactional
     public CreditApplicationDTO create(CreditApplicationDTO creditApplicationDTO) {
         CreditApplication application = new CreditApplication(creditApplicationDTO);
         applicationRepository.save(application);
@@ -30,7 +29,6 @@ public class CreditApplicationServiceImpl implements CreditApplicationService {
     }
 
     @Override
-    @Transactional
     public CreditApplicationDTO findById(Long id) {
         CreditApplication creditApplication = applicationRepository.find(id);
         if (creditApplication == null) {
@@ -40,7 +38,6 @@ public class CreditApplicationServiceImpl implements CreditApplicationService {
     }
 
     @Override
-    @Transactional
     public List<CreditApplicationDTO> findAll() {
         List<CreditApplication> creditApplications = applicationRepository.findAll();
         List<CreditApplicationDTO> creditApplicationDTOS = new ArrayList<>();

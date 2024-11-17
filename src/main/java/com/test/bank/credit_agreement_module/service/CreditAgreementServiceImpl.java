@@ -22,14 +22,12 @@ public class CreditAgreementServiceImpl implements CreditAgreementService{
     }
 
     @Override
-    @Transactional
     public CreditAgreementDTO findById(Long id) {
         CreditAgreement creditAgreement = creditAgreementRepository.find(id);
         return new CreditAgreementDTO(creditAgreement);
     }
 
     @Override
-    @Transactional
     public CreditAgreementDTO create(CreditAgreementDTO creditAgreementDTO) {
         CreditAgreement creditAgreement = new CreditAgreement(creditAgreementDTO);
         creditAgreementRepository.save(creditAgreement);
@@ -37,7 +35,6 @@ public class CreditAgreementServiceImpl implements CreditAgreementService{
     }
 
     @Override
-    @Transactional
     public List<CreditAgreementDTO> findAll() {
 
         List<CreditAgreement> creditAgreements = creditAgreementRepository.findAll();

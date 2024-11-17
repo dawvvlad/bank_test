@@ -21,7 +21,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @Transactional
     public ClientDTO create(ClientDTO clientDTO) {
         Client client = new Client(clientDTO);
         clientRepository.save(client);
@@ -29,7 +28,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @Transactional
     public ClientDTO findById(Long id) {
         Client client = clientRepository.find(id);
         if(client == null) {
@@ -39,7 +37,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @Transactional
     public List<ClientDTO> findAll() {
         List<Client> clients = clientRepository.findAll();
         List<ClientDTO> clientDTOS = new ArrayList<>();

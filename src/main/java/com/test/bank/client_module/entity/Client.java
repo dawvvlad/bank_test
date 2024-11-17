@@ -37,6 +37,7 @@ public class Client {
     private String address;
 
     @Column(name = "marital_status")
+    @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
     @OneToMany(mappedBy = "client")
