@@ -9,16 +9,18 @@ public class ClientDTO {
     private String firstName;
     private String middleName;
     private String lastName;
+    private String passportDetails;
     private String phoneNumber;
     private String address;
 
     public ClientDTO() {}
 
-    public ClientDTO(Long id, String firstName, String middleName, String lastName, String phoneNumber, String address) {
+    public ClientDTO(Long id, String firstName, String middleName, String passportDetails, String lastName, String phoneNumber, String address) {
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
+        this.passportDetails = passportDetails;
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
@@ -27,6 +29,7 @@ public class ClientDTO {
         this.id = client.getId();
         this.firstName = client.getFirstName();
         this.middleName = client.getMiddleName();
+        this.passportDetails = client.getPassportDetails();
         this.lastName = client.getLastName();
         this.phoneNumber = client.getPhoneNumber();
         this.address = client.getAddress();
