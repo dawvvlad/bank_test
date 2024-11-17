@@ -1,6 +1,7 @@
 package com.test.bank.client_module.entity;
 
 import com.test.bank.client_module.dto.ClientDTO;
+import com.test.bank.client_module.enums.MaritalStatus;
 import com.test.bank.credit_application_module.entity.CreditApplication;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -35,6 +36,9 @@ public class Client {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "marital_status")
+    private MaritalStatus maritalStatus;
+
     @OneToMany(mappedBy = "client")
     private List<CreditApplication> creditApplications;
 
@@ -47,6 +51,7 @@ public class Client {
         this.passportDetails = clientDTO.getPassportDetails();
         this.phoneNumber = clientDTO.getPhoneNumber();
         this.address = clientDTO.getAddress();
+        this.maritalStatus = clientDTO.getMaritalStatus();
     }
 
     public void addCreditApplication(CreditApplication creditApplication){

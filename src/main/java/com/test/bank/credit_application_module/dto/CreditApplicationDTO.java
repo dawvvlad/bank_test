@@ -2,6 +2,7 @@ package com.test.bank.credit_application_module.dto;
 
 import com.test.bank.client_module.dto.ClientDTO;
 import com.test.bank.credit_application_module.entity.CreditApplication;
+import com.test.bank.credit_application_module.enums.ApplicationStatus;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -14,10 +15,11 @@ public class CreditApplicationDTO {
     private Double approvedSum;
     private Integer deadline;
     private LocalDateTime createdAt;
+    private ApplicationStatus status;
 
     public CreditApplicationDTO() {}
 
-    public CreditApplicationDTO(Long id, Boolean isApproved, ClientDTO client, Double amount, Double approvedSum, Integer deadline, LocalDateTime createdAt) {
+    public CreditApplicationDTO(Long id, Boolean isApproved, ClientDTO client, Double amount, Double approvedSum, Integer deadline, LocalDateTime createdAt, ApplicationStatus status) {
         this.id = id;
         this.client = client;
         this.amount = amount;
@@ -25,6 +27,7 @@ public class CreditApplicationDTO {
         this.deadline = deadline;
         this.createdAt = createdAt;
         this.isApproved = isApproved;
+        this.status = status;
     }
 
     public CreditApplicationDTO(CreditApplication creditApplication) {
@@ -35,5 +38,6 @@ public class CreditApplicationDTO {
         this.deadline = creditApplication.getDeadline();
         this.createdAt = creditApplication.getDate();
         this.isApproved = creditApplication.getIsApproved();
+        this.status = creditApplication.getStatus();
     }
 }

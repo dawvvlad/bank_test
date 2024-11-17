@@ -3,6 +3,7 @@ package com.test.bank.credit_application_module.entity;
 import com.test.bank.client_module.entity.Client;
 import com.test.bank.credit_agreement_module.entity.CreditAgreement;
 import com.test.bank.credit_application_module.dto.CreditApplicationDTO;
+import com.test.bank.credit_application_module.enums.ApplicationStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -37,6 +38,9 @@ public class CreditApplication {
     @Column(name = "date")
     private LocalDateTime date;
 
+    @Column(name = "status")
+    private ApplicationStatus status;
+
     @OneToOne(mappedBy = "creditApplication")
     private CreditAgreement creditAgreement;
 
@@ -49,5 +53,6 @@ public class CreditApplication {
         this.date = creditApplicationDTO.getCreatedAt();
         this.isApproved = creditApplicationDTO.getIsApproved();
         this.deadline = creditApplicationDTO.getDeadline();
+        this.status = creditApplicationDTO.getStatus();
     }
 }
