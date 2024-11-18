@@ -38,4 +38,21 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
         Session session = sessionFactory.getCurrentSession();
         session.persist(creditApplication);
     }
+
+    @Override
+    public List<CreditApplication> findAllPaginated(int page, int size) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from CreditApplication", CreditApplication.class)
+                .setFirstResult((page - 1) * size)
+                .setMaxResults(size)
+                .list();
+    }
+
+    @Override
+    public Long count() {
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .createQuery("select count(c) from CreditApplication c", Long.class)
+                .getSingleResult();
+    }
 }

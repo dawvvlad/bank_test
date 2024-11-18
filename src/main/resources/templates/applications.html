@@ -6,26 +6,63 @@
     <link rel="stylesheet" th:href="@{/css/applications.css}"></link>
 </head>
 <body>
-    <h1>Applications</h1>
-    <ul th:each="credit: ${credits}">
-        <li th:text="${credit.id}"></li>
-        <li th:text="${credit.amount}"></li>
-        <li th:text="${credit.approvedSum}"></li>
-        <li>
-            <a th:text="${credit.client.firstName + ' ' + credit.client.middleName}" th:href="@{/clients/{id}(id=${credit.client.id})}"></a>
-        </li>
-        <li id="status" th:text="${credit.status}"></li>
-    </ul>
+    <h2>Заявки на кредит</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Запрошенная сумма</th>
+            <th>Одобренная сумма</th>
+            <th>Клиент</th>
+            <th>Статус</th>
+            <th>Срок кредита</th>
+            <th>Дата создания</th>
+            <th>Договор</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="credit : ${credits}">
+            <td th:text="${'#' + credit.getId()}"></td>
+            <td th:text="${credit.getAmount()}"></td>
+            <td th:text="${credit.getApprovedSum()}"></td>
+            <td>
+                <a th:text="${credit.client.getFirstName() + ' ' + credit.client.getMiddleName()}"
+                   th:href="@{/clients/{id}(id=${credit.client.getId()})}"></a>
+            </td>
+            <td th:id="'status-' + ${credit.getId()}" th:text="${credit.getStatus()}"></td>
+            <td th:text="${credit.getDeadline()}"></td>
+            <td th:text="${credit.getCreatedAt()}"></td>
+            <td>#0</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <a th:href="@{/applications(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Prev</a>
+        <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
+        <a th:href="@{/applications(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Next &raquo;</a>
+    </div>
+
+<!--    <ul th:each="credit: ${credits}">-->
+<!--        <li th:text="${credit.id}"></li>-->
+<!--        <li th:text="${credit.amount}"></li>-->
+<!--        <li th:text="${credit.approvedSum}"></li>-->
+<!--        <li>-->
+<!--            <a th:text="${credit.client.firstName + ' ' + credit.client.middleName}" th:href="@{/clients/{id}(id=${credit.client.id})}"></a>-->
+<!--        </li>-->
+<!--        <li id="status" th:text="${credit.status}"></li>-->
+<!--    </ul>-->
 
 
 
     <script>
-        let li = document.getElementById("status")
-        if(li.innerText === 'approved') {
-            li.innerText = "Подписан";
-        } else {
-            li.innerText = "Не подписан"
-        }
+        document.querySelectorAll('[id^="status-"]').forEach(function(statusElement) {
+            if (statusElement.innerText === 'approved') {
+                statusElement.innerText = "Подписан";
+            } else {
+                statusElement.innerText = "Не подписан";
+            }
+        });
     </script>
 </body>
 </html>

@@ -13,9 +13,8 @@ body {
     margin: 0;
 }
 
-h1 {
-    color: red;
-    font-size: 50px;
+h2 {
+    font-size: 30px;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -52,4 +51,59 @@ h1 {
 }
 .main_link:first-child:hover {
     background-color: #008242;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+/* Стили для заголовка таблицы */
+.table thead tr {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+/* Границы ячеек */
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+/* Зебра-полосы для строк */
+.table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+/* Эффект при наведении на строку */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Стили для ссылок внутри таблицы */
+.table a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.table a:hover {
+    text-decoration: underline;
+}
+
+/* Стили статусов */
+.table .status-approved {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.table .status-declined {
+    color: #E74C3C;
+    font-weight: bold;
 }

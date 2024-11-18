@@ -7,4 +7,6 @@ public interface CreditApplicationService {
     CreditApplicationDTO create (CreditApplicationDTO creditApplication);
     CreditApplicationDTO findById (Long id);
     List<CreditApplicationDTO> findAll ();
+    List<CreditApplicationDTO> findAllPaginated (int page, int size);
+    Long count();
 }
