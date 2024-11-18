@@ -33,8 +33,12 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public void save(Client client) {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(client);
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.persist(client);
+            System.out.println(client.toString());
+            session.getTransaction().commit();
+        };
     }
 
     @Override

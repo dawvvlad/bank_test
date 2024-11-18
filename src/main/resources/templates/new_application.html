@@ -7,5 +7,34 @@
 </head>
 <body>
     <h1>Create new app</h1>
+
+    <form action="/clients" method="POST">
+        <label>
+            <input type="text" placeholder="Фамилия" name="middleName">
+        </label>
+        <label>
+            <input type="text" placeholder="Имя" name="firstName">
+        </label>
+        <label>
+            <input type="text" placeholder="Отчество" name="lastName">
+        </label>
+        <label>
+            <input type="text" placeholder="Паспорт" name="passportDetails">
+        </label>
+        <label>
+            <input type="text" placeholder="Телефон" name="phoneNumber">
+        </label>
+        <label>
+            <input type="text" placeholder="Адрес" name="address">
+        </label>
+        <label>
+            Семейное положение:
+            <select name="maritalStatus">
+                <option value="single">Не женат/Не замужем</option>
+                <option value="married">Женат/Замужем</option>
+            </select>
+        </label>
+        <button type="submit">Отправить</button>>
+    </form>
 </body>
 </html>

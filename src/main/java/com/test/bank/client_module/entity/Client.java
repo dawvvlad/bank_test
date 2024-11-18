@@ -40,8 +40,11 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
-    @OneToMany(mappedBy = "client")
-    private List<CreditApplication> creditApplications;
+    @OneToMany(mappedBy = "client",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<CreditApplication> creditApplications = new ArrayList<>();
 
     public Client(){};
 

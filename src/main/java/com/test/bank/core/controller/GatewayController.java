@@ -7,18 +7,17 @@ import com.test.bank.credit_application_module.dto.CreditApplicationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("gateway")
-public class GateWayController {
+public class GatewayController {
     private final ClientController clientController;
     private final CreditApplicationController creditApplicationController;
 
     @Autowired
-    public GateWayController(ClientController clientController, CreditApplicationController creditApplicationController) {
+    public GatewayController(ClientController clientController, CreditApplicationController creditApplicationController) {
         this.clientController = clientController;
         this.creditApplicationController = creditApplicationController;
     }

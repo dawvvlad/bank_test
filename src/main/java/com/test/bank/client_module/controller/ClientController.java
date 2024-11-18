@@ -2,19 +2,14 @@ package com.test.bank.client_module.controller;
 
 import com.test.bank.client_module.dto.ClientDTO;
 import com.test.bank.client_module.service.ClientService;
-import com.test.bank.credit_application_module.dto.CreditApplicationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 public class ClientController {
 
     private final ClientService clientService;
@@ -45,6 +40,14 @@ public class ClientController {
     public String client(Model model, @PathVariable Long id) {
         model.addAttribute("client", clientService.findById(id));
         return "client";
+    }
+
+    @PostMapping("/clients")
+    public String createClient(@ModelAttribute ClientDTO clientDTO, Model model) {
+        model.addAttribute("client", clientDTO);
+        clientService.create(clientDTO);
+        System.out.println("Client created");
+        return "redirect:/clients";
     }
 
 }
