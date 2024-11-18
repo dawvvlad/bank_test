@@ -35,8 +35,19 @@ public class ClientRepositoryImpl implements ClientRepository {
     public void save(Client client) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.persist(client);
-            System.out.println(client.toString());
+
+            Client existingClient = session
+                    .createQuery("from Client where passportDetails = :passportDetails", Client.class)
+                    .setParameter("passportDetails", client.getPassportDetails())
+                    .uniqueResult();
+
+            if (existingClient != null) {
+                session.merge(existingClient);
+            } else {
+                session.persist(client);
+            }
+
+            System.out.println(client);
             session.getTransaction().commit();
         };
     }
