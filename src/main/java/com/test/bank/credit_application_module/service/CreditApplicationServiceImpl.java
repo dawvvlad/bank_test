@@ -39,16 +39,37 @@ public class CreditApplicationServiceImpl implements CreditApplicationService {
 
     @Override
     public List<CreditApplicationDTO> findAll() {
-        List<CreditApplication> creditApplications = applicationRepository.findAll();
+//        List<CreditApplication> creditApplications = applicationRepository.findAll();
+//        List<CreditApplicationDTO> creditApplicationDTOS = new ArrayList<>();
+//
+//        if (creditApplications == null) {
+//            return Collections.emptyList();
+//        }
+//
+//        for (CreditApplication creditApplication : creditApplications) {
+//            creditApplicationDTOS.add(new CreditApplicationDTO(creditApplication));
+//        }
+//        return creditApplicationDTOS;
+
+        return List.of();
+    }
+
+    @Override
+    public List<CreditApplicationDTO> findAllPaginated(int page, int size) {
+        List<CreditApplication> creditApplications = applicationRepository.findAllPaginated(page, size);
         List<CreditApplicationDTO> creditApplicationDTOS = new ArrayList<>();
 
         if (creditApplications == null) {
             return Collections.emptyList();
         }
-
         for (CreditApplication creditApplication : creditApplications) {
             creditApplicationDTOS.add(new CreditApplicationDTO(creditApplication));
         }
         return creditApplicationDTOS;
+    }
+
+    @Override
+    public Long count() {
+        return applicationRepository.count();
     }
 }

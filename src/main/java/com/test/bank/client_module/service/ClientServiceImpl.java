@@ -38,9 +38,24 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientDTO> findAll() {
-        List<Client> clients = clientRepository.findAll();
-        List<ClientDTO> clientDTOS = new ArrayList<>();
+//        List<Client> clients = clientRepository.findAll();
+//        List<ClientDTO> clientDTOS = new ArrayList<>();
+//
+//        if(clients == null) {
+//            return Collections.emptyList();
+//        }
+//
+//        for (Client client : clients) {
+//            clientDTOS.add(new ClientDTO(client));
+//        }
 
+        return List.of();
+    }
+
+    @Override
+    public List<ClientDTO> findAllPaginated(int page, int size) {
+        List<Client> clients = clientRepository.findAllPaginated(page, size);
+        List<ClientDTO> clientDTOS = new ArrayList<>();
         if(clients == null) {
             return Collections.emptyList();
         }
@@ -50,5 +65,10 @@ public class ClientServiceImpl implements ClientService {
         }
 
         return clientDTOS;
+    }
+
+    @Override
+    public Long count() {
+        return clientRepository.count();
     }
 }

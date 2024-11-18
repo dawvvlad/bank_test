@@ -1,4 +1,4 @@
-package com.test.bank.config;
+package com.test.bank.core.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
