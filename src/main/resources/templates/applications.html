@@ -7,5 +7,14 @@
 </head>
 <body>
     <h1>Applications</h1>
+    <ul th:each="credit: ${credits}">
+        <li th:text="${credit.id}"></li>
+        <li th:text="${credit.amount}"></li>
+        <li th:text="${credit.approvedSum}"></li>
+        <li>
+            <a th:text="${credit.client.firstName + ' ' + credit.client.middleName}" th:href="@{/clients/{id}(id=${credit.client.id})}"></a>
+        </li>
+    </ul>
+
 </body>
 </html>
