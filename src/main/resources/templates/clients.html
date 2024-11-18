@@ -6,6 +6,59 @@
     <link rel="stylesheet" th:href="@{/css/clients.css}"></link>
 </head>
 <body>
-    <h1>Clients</h1>
+    <a href="/">На главную</a>
+    <h2>Поиск клиентов</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Паспортные данные</th>
+            <th>Номер телефона</th>
+            <th>Адрес прописки</th>
+            <th>Семейное положение</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="credit : ${credits}">
+            <td th:text="${'#' + credit.getId()}"></td>
+
+            <td>
+                <a th:text="${credit.client.getFirstName() + ' ' + credit.client.getMiddleName()}"
+                   th:href="@{/clients/{id}(id=${credit.client.getId()})}"></a>
+            </td>
+
+            <td th:text="${credit.getAmount() + ' руб.'}"></td>
+            <td th:id="'status-' + ${credit.getId()}" th:text="${credit.getStatus()}"></td>
+            <td th:text="${credit.getApprovedSum() + ' руб.'}"></td>
+
+            <td th:text="${credit.getDeadline()}"></td>
+            <td th:text="${credit.getCreatedAt()}"></td>
+            <td>
+                <a th:text="'#' + ${credit.getAgreementNumber()}"
+                   th:href="@{/agreements/{id}(id=${credit.getAgreementNumber()})}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <a th:href="@{/applications(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Prev</a>
+        <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
+        <a th:href="@{/applications(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Next &raquo;</a>
+    </div>
+
+    <script>
+        document.querySelectorAll('[id^="status-"]').forEach(function(statusElement) {
+            if (statusElement.innerText === 'approved') {
+                statusElement.innerText = "Подписан";
+            } else {
+                statusElement.innerText = "Не подписан";
+            }
+        });
+    </script>
 </body>
 </html>

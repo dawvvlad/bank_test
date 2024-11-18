@@ -16,10 +16,11 @@ public class CreditApplicationDTO {
     private Integer deadline;
     private LocalDateTime createdAt;
     private ApplicationStatus status;
+    private Long agreementNumber;
 
     public CreditApplicationDTO() {}
 
-    public CreditApplicationDTO(Long id, Boolean isApproved, ClientDTO client, Double amount, Double approvedSum, Integer deadline, LocalDateTime createdAt, ApplicationStatus status) {
+    public CreditApplicationDTO(Long id, Boolean isApproved, ClientDTO client, Double amount, Double approvedSum, Integer deadline, LocalDateTime createdAt, ApplicationStatus status, Long agreementNumber) {
         this.id = id;
         this.client = client;
         this.amount = amount;
@@ -28,6 +29,7 @@ public class CreditApplicationDTO {
         this.createdAt = createdAt;
         this.isApproved = isApproved;
         this.status = status;
+        this.agreementNumber = agreementNumber;
     }
 
     public CreditApplicationDTO(CreditApplication creditApplication) {
@@ -39,5 +41,6 @@ public class CreditApplicationDTO {
         this.createdAt = creditApplication.getDate();
         this.isApproved = creditApplication.getIsApproved();
         this.status = creditApplication.getStatus();
+        this.agreementNumber = creditApplication.getCreditAgreement().getId();
     }
 }
