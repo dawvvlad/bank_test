@@ -18,15 +18,11 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping
-    public String index() {
-        System.out.println(clientService.findAll());
-        return "index";
-    }
-
     @GetMapping("/clients")
     public String clients(Model model) {
         return "clients";
     }
+
+
 
 }

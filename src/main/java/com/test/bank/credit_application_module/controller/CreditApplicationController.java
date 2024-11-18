@@ -11,6 +11,11 @@ public class CreditApplicationController {
 
     @GetMapping
     public String index(Model model) {
-        return "index";
+        return "applications";
+    }
+
+    @GetMapping("/new")
+    public String newApplication(Model model) {
+        return "new_application";
     }
 }
