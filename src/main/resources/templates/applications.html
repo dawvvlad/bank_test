@@ -6,51 +6,53 @@
     <link rel="stylesheet" th:href="@{/css/applications.css}"></link>
 </head>
 <body>
-    <a href="/">На главную</a>
-    <h2>Заявки на кредит</h2>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Номер</th>
-            <th>Клиент</th>
-            <th>Запрошенная сумма</th>
-            <th>Статус</th>
-            <th>Одобренная сумма</th>
-            <th>Срок кредита</th>
-            <th>Дата создания</th>
-            <th>Номер договора</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="credit : ${credits}">
-            <td th:text="${'#' + credit.getId()}"></td>
+    <div class="container">
+        <a href="/">На главную</a>
+        <h2>Заявки на кредит</h2>
 
-            <td>
-                <a th:text="${credit.client.getFirstName() + ' ' + credit.client.getMiddleName()}"
-                   th:href="@{/clients/{id}(id=${credit.client.getId()})}"></a>
-            </td>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Номер</th>
+                <th>Клиент</th>
+                <th>Запрошенная сумма</th>
+                <th>Статус</th>
+                <th>Одобренная сумма</th>
+                <th>Срок кредита</th>
+                <th>Дата создания</th>
+                <th>Номер договора</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="credit : ${credits}">
+                <td th:text="${'#' + credit.getId()}"></td>
 
-            <td th:text="${credit.getAmount() + ' руб.'}"></td>
-            <td th:id="'status-' + ${credit.getId()}" th:text="${credit.getStatus()}"></td>
-            <td th:text="${credit.getApprovedSum() + ' руб.'}"></td>
+                <td>
+                    <a th:text="${credit.client.getFirstName() + ' ' + credit.client.getMiddleName()}"
+                       th:href="@{/clients/{id}(id=${credit.client.getId()})}"></a>
+                </td>
 
-            <td th:text="${credit.getDeadline()}"></td>
-            <td th:text="${credit.getCreatedAt()}"></td>
-            <td>
-                <a th:text="'#' + ${credit.getAgreementNumber()}"
-                th:href="@{/agreements/{id}(id=${credit.getAgreementNumber()})}"></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                <td th:text="${credit.getAmount() + ' руб.'}"></td>
+                <td th:id="'status-' + ${credit.getId()}" th:text="${credit.getStatus()}"></td>
+                <td th:text="${credit.getApprovedSum() + ' руб.'}"></td>
 
-    <div class="pagination">
-        <a th:href="@{/applications(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Prev</a>
-        <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
-        <a th:href="@{/applications(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Next &raquo;</a>
+                <td th:text="${credit.getDeadline()}"></td>
+                <td th:text="${credit.getCreatedAt()}"></td>
+                <td>
+                    <a th:text="'#' + ${credit.getAgreementNumber()}"
+                    th:href="@{/agreements/{id}(id=${credit.getAgreementNumber()})}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <a th:href="@{/applications(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Prev</a>
+            <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
+            <a th:href="@{/applications(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Next &raquo;</a>
+        </div>
     </div>
-
     <script>
         document.querySelectorAll('[id^="status-"]').forEach(function(statusElement) {
             if (statusElement.innerText === 'approved') {
