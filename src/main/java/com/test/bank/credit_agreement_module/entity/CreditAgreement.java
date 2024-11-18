@@ -24,6 +24,7 @@ public class CreditAgreement {
     private LocalDateTime signDate;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private AgreementStatus status;
 
     public CreditAgreement(){};

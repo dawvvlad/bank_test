@@ -14,7 +14,7 @@
         <li>
             <a th:text="${credit.client.firstName + ' ' + credit.client.middleName}" th:href="@{/clients/{id}(id=${credit.client.id})}"></a>
         </li>
+        <li th:text="${credit.status}"></li>
     </ul>
-
 </body>
 </html>
