@@ -14,7 +14,18 @@
         <li>
             <a th:text="${credit.client.firstName + ' ' + credit.client.middleName}" th:href="@{/clients/{id}(id=${credit.client.id})}"></a>
         </li>
-        <li th:text="${credit.status}"></li>
+        <li id="status" th:text="${credit.status}"></li>
     </ul>
+
+
+
+    <script>
+        let li = document.getElementById("status")
+        if(li.innerText === 'approved') {
+            li.innerText = "Подписан";
+        } else {
+            li.innerText = "Не подписан"
+        }
+    </script>
 </body>
 </html>
