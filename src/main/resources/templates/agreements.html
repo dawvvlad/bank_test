@@ -21,8 +21,10 @@
         </thead>
         <tbody>
         <tr th:each="agreement : ${creditAgreements}">
-            <td th:text="${'#' + agreement.getId()}"></td>
-
+            <td>
+                <a th:text="${'#' + agreement.getId()}"
+                   th:href="@{/agreements/{id}(id=${agreement.getId()})}"></a>
+            </td>
             <td>
                 <a th:text="${'#' + agreement.application.getId()}"
                    th:href="@{/applications/{id}(id=${agreement.application.getId()})}"></a>

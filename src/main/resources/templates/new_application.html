@@ -2,50 +2,130 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New Application</title>
-    <link rel="stylesheet" th:href="@{/css/new_app.css}"></link>
+    <title>Новая заявка</title>
+    <link rel="stylesheet" th:href="@{/css/new_app.css}">
+    <style>
+        .container {
+            width: 100%;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        }
+
+        button:hover {
+        background-color: #2980b9;
+        }
+
+        button:disabled {
+        background-color: #bdc3c7;
+        cursor: not-allowed;
+        }
+
+        .form-group {
+        margin-bottom: 20px;
+        }
+
+        .form-group label {
+        margin-bottom: 5px;
+        }
+        </style>
 </head>
 <body>
-    <h1>Create new app</h1>
-    <form action="/gateway/new" method="POST">
-        <label>
-            <input type="text" placeholder="Фамилия" name="middleName">
-        </label>
-        <label>
-            <input type="text" placeholder="Имя" name="firstName">
-        </label>
-        <label>
-            <input type="text" placeholder="Отчество" name="lastName">
-        </label>
-        <label>
-            <input type="text" placeholder="Паспорт" name="passportDetails">
-        </label>
-        <label>
-            <input type="text" placeholder="Телефон" name="phoneNumber">
-        </label>
-        <label>
-            <input type="text" placeholder="Адрес" name="address">
-        </label>
-        <label>
-            Семейное положение:
-            <select name="maritalStatus">
-                <option value="single">Не женат/Не замужем</option>
-                <option value="married">Женат/Замужем</option>
-            </select>
-        </label>
-        <label>
-            <input type="number" placeholder="Сумма" name="amount">
-        </label>
-        <label>
-            <input type="number" placeholder="Срок" name="deadline">
-        </label>
-        <button type="submit">Отправить</button>>
-    </form>
+    <div class="container">
+        <a href="/">На главную</a>
+        
+        <h1>Новая заявка</h1>
+        <form action="/gateway/new" method="POST">
+            <div class="form-group">
+                <label for="middleName">Фамилия</label>
+                <input type="text" id="middleName" placeholder="Фамилия" name="middleName" required>
+            </div>
 
-    <form action="/applications/new" method="POST">
+            <div class="form-group">
+                <label for="firstName">Имя</label>
+                <input type="text" id="firstName" placeholder="Имя" name="firstName" required>
+            </div>
 
+            <div class="form-group">
+                <label for="lastName">Отчество</label>
+                <input type="text" id="lastName" placeholder="Отчество" name="lastName">
+            </div>
 
-        <button type="submit">Отправить</button>>
-    </form>
+            <div class="form-group">
+                <label for="passportDetails">Паспорт</label>
+                <input type="text" id="passportDetails" placeholder="Паспорт" name="passportDetails" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Телефон</label>
+                <input type="text" id="phoneNumber" placeholder="Телефон" name="phoneNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Адрес</label>
+                <input type="text" id="address" placeholder="Адрес" name="address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="maritalStatus">Семейное положение</label>
+                <select id="maritalStatus" name="maritalStatus" required>
+                    <option value="single">Не женат/Не замужем</option>
+                    <option value="married">Женат/Замужем</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Сумма</label>
+                <input type="number" id="amount" placeholder="Сумма" name="amount" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deadline">Срок</label>
+                <input type="number" id="deadline" placeholder="Срок" name="deadline" required>
+            </div>
+
+            <button type="submit">Отправить</button>
+        </form>
+
+    </div>
+
 </body>
 </html>
