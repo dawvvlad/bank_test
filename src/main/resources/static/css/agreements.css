@@ -1,1 +1,41 @@
 @import "main.css";
+
+.info {
+    margin-bottom: 20px;
+}
+
+.info p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 20px 0;
+    color: #555;
+}
+
+form {
+    text-align: center;
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+input[type="submit"]:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}

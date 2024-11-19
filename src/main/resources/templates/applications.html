@@ -26,7 +26,10 @@
             </thead>
             <tbody>
             <tr th:each="credit : ${credits}">
-                <td th:text="${'#' + credit.getId()}"></td>
+                <td>
+                    <a th:text="${'#' + credit.getId()}"
+                       th:href="@{/applications/{id}(id=${credit.getId()})}"></a>
+                </td>
 
                 <td>
                     <a th:text="${credit.client.getFirstName() + ' ' + credit.client.getMiddleName()}"
