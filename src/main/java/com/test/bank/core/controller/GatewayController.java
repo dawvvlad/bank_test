@@ -61,41 +61,38 @@ public class GatewayController {
             Thread.sleep(1000);
 
             double approvedSum = decisionProcessor.makeDecision(creditApplicationDTO.getAmount());
+
             System.out.println(approvedSum);
 
             if(approvedSum != -1) {
                 isApproved = true;
-
-
+                // Credit Application DTO
+                creditApplicationDTO.setApprovedSum(approvedSum);
+                creditApplicationDTO.setStatus(ApplicationStatus.approved);
             } else {
                 creditApplicationDTO.setStatus(ApplicationStatus.not_approved);
                 creditApplicationDTO.setApprovedSum(0d);
             }
-
-
-            creditApplicationDTO.setApprovedSum(approvedSum);
-            creditApplicationDTO.setStatus(ApplicationStatus.approved);
             creditApplicationDTO.setIsApproved(isApproved);
             creditApplicationDTO.setClient(clientDTO);
 
-            CreditAgreementDTO creditAgreementDTO = new CreditAgreementDTO();
-            creditAgreementDTO.setAgreementStatus(AgreementStatus.not_signed);
-            creditAgreementDTO.setSignDate(LocalDateTime.now());
-            creditAgreementDTO.setApplication(creditApplicationDTO);
+            // Credit Agreement DTO
+            if(isApproved) {
+                CreditAgreementDTO creditAgreementDTO = new CreditAgreementDTO();
+                creditAgreementDTO.setAgreementStatus(AgreementStatus.not_signed);
+                creditAgreementDTO.setSignDate(LocalDateTime.now());
+                creditAgreementDTO.setApplication(creditApplicationDTO);
+                creditAgreementService.create(creditAgreementDTO);
 
-            creditAgreementService.create(creditAgreementDTO);
-
+                return "redirect:/sign_agreement";
+            } else {
+                creditApplicationService.create(creditApplicationDTO);
+            }
             model.addAttribute("client", clientDTO);
             model.addAttribute("creditApplication", creditApplicationDTO);
-
-
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         return "redirect:/clients";
-
-
     }
 }
