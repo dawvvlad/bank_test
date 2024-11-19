@@ -24,8 +24,11 @@ public class CreditApplicationServiceImpl implements CreditApplicationService {
     @Override
     public CreditApplicationDTO create(CreditApplicationDTO creditApplicationDTO) {
         CreditApplication application = new CreditApplication(creditApplicationDTO);
-        applicationRepository.save(application);
-        return creditApplicationDTO;
+        CreditApplication savedApplication = applicationRepository.save(application);
+        CreditApplicationDTO creditApplicationDTO1 = new CreditApplicationDTO(savedApplication);
+
+        System.out.println(creditApplicationDTO);
+        return creditApplicationDTO1;
     }
 
     @Override

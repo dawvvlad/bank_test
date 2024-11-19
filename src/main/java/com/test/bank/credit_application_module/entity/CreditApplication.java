@@ -19,8 +19,8 @@ public class CreditApplication {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
     @Column(name = "is_approved")
@@ -49,6 +49,7 @@ public class CreditApplication {
 
     public CreditApplication(CreditApplicationDTO creditApplicationDTO) {
         this.id = creditApplicationDTO.getId();
+        this.client = new Client(creditApplicationDTO.getClient());
         this.amount = creditApplicationDTO.getAmount();
         this.approvedSum = creditApplicationDTO.getApprovedSum();
         this.date = creditApplicationDTO.getCreatedAt();

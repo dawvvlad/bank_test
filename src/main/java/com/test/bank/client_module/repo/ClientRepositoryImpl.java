@@ -42,11 +42,10 @@ public class ClientRepositoryImpl implements ClientRepository {
                     .uniqueResult();
 
             if (existingClient != null) {
-                session.merge(existingClient);
+                return existingClient;
             } else {
                 session.persist(client);
             }
-
             session.getTransaction().commit();
         };
             return client;

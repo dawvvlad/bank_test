@@ -41,7 +41,6 @@ public class Client {
     private MaritalStatus maritalStatus;
 
     @OneToMany(mappedBy = "client",
-            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<CreditApplication> creditApplications = new ArrayList<>();

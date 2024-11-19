@@ -7,8 +7,7 @@
 </head>
 <body>
     <h1>Create new app</h1>
-
-    <form action="/clients" method="POST">
+    <form action="/gateway/new" method="POST">
         <label>
             <input type="text" placeholder="Фамилия" name="middleName">
         </label>
@@ -34,6 +33,18 @@
                 <option value="married">Женат/Замужем</option>
             </select>
         </label>
+        <label>
+            <input type="number" placeholder="Сумма" name="amount">
+        </label>
+        <label>
+            <input type="number" placeholder="Срок" name="deadline">
+        </label>
+        <button type="submit">Отправить</button>>
+    </form>
+
+    <form action="/applications/new" method="POST">
+
+
         <button type="submit">Отправить</button>>
     </form>
 </body>

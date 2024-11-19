@@ -34,12 +34,16 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
     }
 
     @Override
-    public void save(CreditApplication creditApplication) {
+    public CreditApplication save(CreditApplication creditApplication) {
+
         try (Session session = sessionFactory.openSession()){
             session.beginTransaction();
             session.persist(creditApplication);
             session.getTransaction().commit();
         };
+
+        System.out.println(creditApplication);
+        return creditApplication;
     }
 
     @Override

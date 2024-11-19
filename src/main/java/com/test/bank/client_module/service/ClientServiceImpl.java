@@ -23,8 +23,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO create(ClientDTO clientDTO) {
         Client client = new Client(clientDTO);
-        ClientDTO finalClient = new ClientDTO(clientRepository.save(client));
-
+        Client savedClient = clientRepository.save(client);
+        ClientDTO finalClient = new ClientDTO(savedClient);
         System.out.println(finalClient);
         return finalClient;
     }
