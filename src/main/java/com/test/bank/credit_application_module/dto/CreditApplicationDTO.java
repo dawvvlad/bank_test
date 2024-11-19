@@ -16,7 +16,7 @@ public class CreditApplicationDTO {
     private Integer deadline;
     private LocalDateTime createdAt = LocalDateTime.now();
     private ApplicationStatus status;
-    private Long agreementNumber;
+    private Long agreementNumber = null;
 
     public CreditApplicationDTO() {}
 
@@ -41,6 +41,8 @@ public class CreditApplicationDTO {
         this.createdAt = creditApplication.getDate();
         this.isApproved = creditApplication.getIsApproved();
         this.status = creditApplication.getStatus();
-        this.agreementNumber = creditApplication.getCreditAgreement().getId();
+        this.agreementNumber = (creditApplication.getCreditAgreement() == null ?
+                null :
+                creditApplication.getCreditAgreement().getId());
     }
 }

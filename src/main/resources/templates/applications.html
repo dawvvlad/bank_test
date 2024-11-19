@@ -43,6 +43,13 @@
                     <a th:text="'#' + ${credit.getAgreementNumber()}"
                     th:href="@{/agreements/{id}(id=${credit.getAgreementNumber()})}"></a>
                 </td>
+                <td th:if="${credit.getAgreementNumber() != null}">
+                    <a th:text="'#' + ${credit.getAgreementNumber()}"
+                       th:href="@{/agreements/{id}(id=${credit.getAgreementNumber()})}"></a>
+                </td>
+                <td th:if="${credit.getAgreementNumber() == null}">
+                    Нет договора
+                </td>
             </tr>
             </tbody>
         </table>

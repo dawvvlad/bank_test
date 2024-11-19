@@ -44,15 +44,4 @@ public class CreditApplicationController {
 
         return "application";
     }
-
-//    @PostMapping("/new")
-//    public String newApplication(CreditApplicationDTO creditApplicationDTO,
-//                                 Model model) {
-//        model.addAttribute("creditApplication", creditApplicationDTO);
-//
-//        CreditApplicationDTO res = creditApplicationService.create(creditApplicationDTO);
-//
-//        System.out.println("New Application created "  + res);
-//        return "new_application";
-//    }
 }

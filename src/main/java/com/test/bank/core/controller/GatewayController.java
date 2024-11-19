@@ -49,7 +49,7 @@ public class GatewayController {
 
         model.addAttribute("client", clientDTO);
         model.addAttribute("creditApplication", creditApplicationDTO);
-        return "new_application";
+        return "redirect:/clients";
 
 
     }

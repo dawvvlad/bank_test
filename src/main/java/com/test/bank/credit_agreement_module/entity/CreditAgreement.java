@@ -18,7 +18,7 @@ public class CreditAgreement {
 
     @OneToOne
     @JoinColumn(name = "credit_app_id")
-    private CreditApplication creditApplication;
+    private CreditApplication creditApplication = null;
 
     @Column(name = "sign_date")
     private LocalDateTime signDate;
@@ -29,7 +29,11 @@ public class CreditAgreement {
 
     public CreditAgreement(){};
     public CreditAgreement(CreditAgreementDTO creditAgreementDTO) {
-        this.creditApplication = new CreditApplication(creditAgreementDTO.getApplication());
+        if(creditAgreementDTO.getApplication() == null) {
+            this.creditApplication = null;
+        } else {
+            this.creditApplication = new CreditApplication(creditAgreementDTO.getApplication());
+        }
         this.signDate = LocalDateTime.now();
         this.status = creditAgreementDTO.getAgreementStatus();
     }

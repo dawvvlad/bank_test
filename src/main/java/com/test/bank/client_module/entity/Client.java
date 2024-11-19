@@ -40,9 +40,7 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
-    @OneToOne(mappedBy = "client",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private CreditApplication creditApplication;
 
     public Client(){};

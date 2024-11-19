@@ -21,7 +21,6 @@ public class ClientDTO {
     private Long creditApplicationId;
 
     public ClientDTO() {}
-
     public ClientDTO(Long id,
                      String firstName,
                      String middleName,
@@ -51,6 +50,6 @@ public class ClientDTO {
         this.phoneNumber = client.getPhoneNumber();
         this.address = client.getAddress();
         this.maritalStatus = client.getMaritalStatus();
-        this.creditApplicationId = client.getCreditApplication().getId();
+        this.creditApplicationId = (client.getCreditApplication().getId() == null) ? null : client.getCreditApplication().getId();
     }
 }

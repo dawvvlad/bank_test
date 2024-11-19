@@ -45,11 +45,9 @@ public class ClientServiceImpl implements ClientService {
         if(clients == null) {
             return Collections.emptyList();
         }
-
         for (Client client : clients) {
             clientDTOS.add(new ClientDTO(client));
         }
-
         return clientDTOS;
     }
 

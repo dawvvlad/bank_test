@@ -34,8 +34,11 @@
                 <td th:text="${client.getPhoneNumber()}"></td>
                 <td th:text="${client.getAddress()}"></td>
                 <td th:id="'marital-' + ${client.getId()}" th:text="${client.getMaritalStatus()}"></td>
-                <td th:each="appId: ${client.getCreditApplicationIds()}">
-                    <a th:href="@{/applications/{id}(id=${appId})}" th:text="'#' + ${appId}"></a>
+                <td th:if="${client.getCreditApplicationId() != null}">
+                    <a th:href="@{/applications/{id}(id=${client.getCreditApplicationId()})}" th:text="'#' + ${client.getCreditApplicationId()}"></a>
+                </td>
+                <td th:if="${client.getCreditApplicationId() == null}">
+                    Нет заявки
                 </td>
             </tr>
             </tbody>

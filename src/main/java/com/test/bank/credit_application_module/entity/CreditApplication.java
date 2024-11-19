@@ -17,7 +17,7 @@ public class CreditApplication {
     @Column(name = "id")
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
@@ -40,8 +40,8 @@ public class CreditApplication {
     @Enumerated(EnumType.STRING)
     private ApplicationStatus status;
 
-    @OneToOne(mappedBy = "creditApplication")
-    private CreditAgreement creditAgreement;
+    @OneToOne(mappedBy = "creditApplication", orphanRemoval = true, fetch = FetchType.LAZY)
+    private CreditAgreement creditAgreement = null;
 
     public CreditApplication() {};
 
