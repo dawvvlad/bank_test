@@ -20,6 +20,8 @@ public class CreditAgreementDTO {
         this.id = creditAgreement.getId();
         this.agreementStatus = creditAgreement.getStatus();
         this.signDate = creditAgreement.getSignDate();
-        this.application = new CreditApplicationDTO(creditAgreement.getCreditApplication());
+        this.application = creditAgreement.getCreditApplication() == null ?
+                null :
+                new CreditApplicationDTO(creditAgreement.getCreditApplication());
     }
 }

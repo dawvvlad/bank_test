@@ -32,7 +32,11 @@ public class CreditApplicationDTO {
         this.agreementNumber = agreementNumber;
     }
     public CreditApplicationDTO(CreditApplication creditApplication) {
-        this.id = creditApplication.getId();
+        if(creditApplication != null) {
+            this.id = creditApplication.getId();
+        } else {
+            this.id = null;
+        }
         this.client = new ClientDTO(creditApplication.getClient());
         this.amount = creditApplication.getAmount();
         this.approvedSum = creditApplication.getApprovedSum();

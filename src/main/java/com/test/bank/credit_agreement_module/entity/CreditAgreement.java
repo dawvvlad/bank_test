@@ -16,7 +16,7 @@ public class CreditAgreement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "credit_app_id")
     private CreditApplication creditApplication = null;
 
