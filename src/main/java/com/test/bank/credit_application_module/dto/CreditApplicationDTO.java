@@ -31,7 +31,6 @@ public class CreditApplicationDTO {
         this.status = status;
         this.agreementNumber = agreementNumber;
     }
-
     public CreditApplicationDTO(CreditApplication creditApplication) {
         this.id = creditApplication.getId();
         this.client = new ClientDTO(creditApplication.getClient());
