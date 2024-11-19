@@ -25,7 +25,6 @@ public class CreditAgreementController {
 
     @PostMapping("/{id}")
     public String updateCreditAgreement(@PathVariable("id") Long id) {
-
         if(id != null) {
             creditAgreementService.updateCreditAgreementStatus(id, AgreementStatus.signed);
         }

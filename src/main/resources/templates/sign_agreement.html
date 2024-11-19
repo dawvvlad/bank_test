@@ -13,7 +13,7 @@
             <p th:text="'Фамилия клиента: ' + ${client.getLastName()}"></p>
             <p th:text="'Сумма кредита: ' + ${creditApplication.getApprovedSum()}"></p>
             <p th:text="'Дата создания заявки: ' + ${creditApplication.getCreatedAt()}"></p>
-            <p th:text="'Статус договора: ' + ${creditAgreement.getAgreementStatus()}"></p>
+            <p th:id="'agreement-' + ${creditAgreement.getId()}" th:text="'Статус договора: ' + ${creditAgreement.getAgreementStatus()}"></p>
         </div>
 
         <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur tempus tellus ac dignissim. Vestibulum quis ligula nisl. Phasellus ut blandit tellus. Aliquam consectetur auctor ante, eget porttitor dolor lacinia ac. In ligula ligula, bibendum sed tellus et, dignissim vestibulum urna. Nullam aliquam aliquam fringilla. Nulla nec venenatis tortor. Aliquam sit amet molestie eros. Aenean sodales arcu convallis imperdiet aliquet.
@@ -26,11 +26,11 @@
     </div>
 
     <script>
-        document.querySelectorAll('[id^="marital-"]').forEach(function(statusElement) {
-            if (statusElement.innerText === 'single') {
-                statusElement.innerText = "Не женат";
+        document.querySelectorAll('[id^="agreement-"]').forEach(function(statusElement) {
+            if (statusElement.innerText === 'signed') {
+                statusElement.innerText = "Подписан";
             } else {
-                statusElement.innerText = "Женат";
+                statusElement.innerText = "Не подписан";
             }
         });
     </script>

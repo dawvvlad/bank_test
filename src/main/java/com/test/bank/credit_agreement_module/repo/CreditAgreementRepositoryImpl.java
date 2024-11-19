@@ -21,7 +21,6 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
 
     @Override
     public void updateAgreementStatus(Long id, AgreementStatus agreementStatus) {
-
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             CreditAgreement creditAgreement = session.get(CreditAgreement.class, id);
@@ -57,7 +56,7 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
     @Override
     public List<CreditAgreement> findAllPaginated(int page, int size) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from CreditAgreement order by id", CreditAgreement.class)
+        return session.createQuery("from CreditAgreement order by id desc ", CreditAgreement.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .list();

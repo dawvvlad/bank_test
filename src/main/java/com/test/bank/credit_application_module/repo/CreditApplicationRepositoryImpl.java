@@ -49,7 +49,7 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
     @Override
     public List<CreditApplication> findAllPaginated(int page, int size) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from CreditApplication", CreditApplication.class)
+        return session.createQuery("from CreditApplication order by id desc ", CreditApplication.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .list();

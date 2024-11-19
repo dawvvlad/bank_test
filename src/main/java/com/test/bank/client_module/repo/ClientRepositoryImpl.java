@@ -55,7 +55,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> findAllPaginated(int page, int size) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Client order by id", Client.class)
+        return session.createQuery("from Client order by id desc ", Client.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .list();
