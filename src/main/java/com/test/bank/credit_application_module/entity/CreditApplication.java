@@ -6,8 +6,6 @@ import com.test.bank.credit_application_module.dto.CreditApplicationDTO;
 import com.test.bank.credit_application_module.enums.ApplicationStatus;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,7 +17,7 @@ public class CreditApplication {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 

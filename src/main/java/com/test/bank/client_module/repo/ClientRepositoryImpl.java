@@ -1,5 +1,6 @@
 package com.test.bank.client_module.repo;
 
+import com.test.bank.client_module.dto.ClientDTO;
 import com.test.bank.client_module.entity.Client;
 import com.test.bank.credit_application_module.entity.CreditApplication;
 import org.hibernate.Session;
@@ -66,5 +67,15 @@ public class ClientRepositoryImpl implements ClientRepository {
         return session
                 .createQuery("select count(c) from Client c", Long.class)
                 .getSingleResult();
+    }
+
+    @Override
+    public Client findByPassportOrNumber(String passportDetails, String number) {
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .createQuery("from Client where passportDetails = :passportDetails or phoneNumber = :number", Client.class)
+                .setParameter("passportDetails", passportDetails)
+                .setParameter("number", number)
+                .uniqueResult();
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 public interface ClientService {
     ClientDTO create(ClientDTO clientDTO);
     ClientDTO findById(Long id);
-    List<ClientDTO> findAll();
     List<ClientDTO> findAllPaginated (int page, int size);
     Long count();
+    ClientDTO findByPassportOrNumber(String passport, String number);
 }

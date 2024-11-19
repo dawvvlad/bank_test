@@ -40,10 +40,10 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
-    @OneToMany(mappedBy = "client",
+    @OneToOne(mappedBy = "client",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<CreditApplication> creditApplications = new ArrayList<>();
+    private CreditApplication creditApplication;
 
     public Client(){};
 
@@ -55,12 +55,5 @@ public class Client {
         this.phoneNumber = clientDTO.getPhoneNumber();
         this.address = clientDTO.getAddress();
         this.maritalStatus = clientDTO.getMaritalStatus();
-    }
-
-    public void addCreditApplication(CreditApplication creditApplication){
-        if(this.creditApplications == null){
-            this.creditApplications = new ArrayList<>();
-        }
-        this.creditApplications.add(creditApplication);
     }
 }

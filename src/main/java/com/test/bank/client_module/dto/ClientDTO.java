@@ -18,7 +18,7 @@ public class ClientDTO {
     private String phoneNumber;
     private String address;
     private MaritalStatus maritalStatus;
-    private List<Long> creditApplicationIds = new ArrayList<>();
+    private Long creditApplicationId;
 
     public ClientDTO() {}
 
@@ -30,7 +30,7 @@ public class ClientDTO {
                      String phoneNumber,
                      String address,
                      MaritalStatus maritalStatus,
-                     List<Long> creditApplicationIds) {
+                     Long creditApplicationId) {
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -39,7 +39,7 @@ public class ClientDTO {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.maritalStatus = maritalStatus;
-        this.creditApplicationIds = creditApplicationIds;
+        this.creditApplicationId = creditApplicationId;
     }
 
     public ClientDTO(Client client) {
@@ -51,9 +51,6 @@ public class ClientDTO {
         this.phoneNumber = client.getPhoneNumber();
         this.address = client.getAddress();
         this.maritalStatus = client.getMaritalStatus();
-
-        for(CreditApplication creditApplication : client.getCreditApplications()) {
-            this.creditApplicationIds.add(creditApplication.getId());
-        }
+        this.creditApplicationId = client.getCreditApplication().getId();
     }
 }
