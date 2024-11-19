@@ -56,7 +56,7 @@
 
         <div class="pagination">
             <a th:href="@{/applications(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Назад</a>
-            <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
+            <span> Страница <span th:text="${currentPage}"></span> из <span th:text="${totalPages}"></span></span>
             <a th:href="@{/applications(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Вперед &raquo;</a>
         </div>
     </div>

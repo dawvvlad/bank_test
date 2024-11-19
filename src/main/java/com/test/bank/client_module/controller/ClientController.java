@@ -21,7 +21,7 @@ public class ClientController {
 
     @GetMapping("/clients")
     public String clients(@RequestParam(defaultValue = "1") int page,
-                          @RequestParam(defaultValue = "10") int size,
+                          @RequestParam(defaultValue = "15") int size,
                           Model model) {
 
         long totalRecords = clientService.count();

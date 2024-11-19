@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
     <title>Заявка</title>
+    <link rel="stylesheet" th:href="@{/css/applications.css}"></link>
 </head>
 <body>
     <div class="container">
+
+        <a href="/">На главную</a>
+        
         <h2 th:text="'Заявка #' + ${creditApplicationDTO.getId()}"></h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Статус</th>
+                    <th>Сумма кредита</th>
+                    <th>Срок кредита</th>
+                    <th>Дата создания</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="'#' + ${creditApplicationDTO.getId()}"></td>
+                    <td th:id="'status-' + ${creditApplicationDTO.getId()}" th:text="${creditApplicationDTO.getStatus()}"></td>
+                    <td th:text="${creditApplicationDTO.getApprovedSum()}"></td>
+                    <td th:text="${creditApplicationDTO.getDeadline()}"></td>
+                    <td th:text="${creditApplicationDTO.getCreatedAt()}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+    <script>
+        document.querySelectorAll('[id^="status-"]').forEach(function(statusElement) {
+            if (statusElement.innerText === 'approved') {
+                statusElement.innerText = "Одобрена";
+            } else {
+                statusElement.innerText = "Не одобрена";
+            }
+        });
+    </script>
 </body>
 </html>

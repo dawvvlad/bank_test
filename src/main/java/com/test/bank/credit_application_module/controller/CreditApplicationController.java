@@ -22,7 +22,7 @@ public class CreditApplicationController {
 
     @GetMapping
     public String applications(@RequestParam(defaultValue = "1") int page,
-                               @RequestParam(defaultValue = "10") int size,
+                               @RequestParam(defaultValue = "15") int size,
                                Model model) {
 
         long totalRecords = creditApplicationService.count();
