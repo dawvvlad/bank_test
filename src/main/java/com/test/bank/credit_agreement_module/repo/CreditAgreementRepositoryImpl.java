@@ -19,9 +19,13 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
     }
 
     @Override
-    public void save(CreditAgreement creditAgreement) {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(creditAgreement);
+    public CreditAgreement save(CreditAgreement creditAgreement) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.persist(creditAgreement);
+            session.getTransaction().commit();
+        }
+        return creditAgreement;
     }
 
     @Override
@@ -36,5 +40,22 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
         return session
                 .createQuery("from CreditAgreement", CreditAgreement.class)
                 .list();
+    }
+
+    @Override
+    public List<CreditAgreement> findAllPaginated(int page, int size) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from CreditAgreement order by id", CreditAgreement.class)
+                .setFirstResult((page - 1) * size)
+                .setMaxResults(size)
+                .list();
+    }
+
+    @Override
+    public long count() {
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .createQuery("select count(c) from CreditAgreement c", Long.class)
+                .getSingleResult();
     }
 }

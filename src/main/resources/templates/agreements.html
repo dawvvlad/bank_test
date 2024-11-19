@@ -6,6 +6,49 @@
     <link rel="stylesheet" th:href="@{/css/agreements.css}"></link>
 </head>
 <body>
-    <h1>Agreements</h1>
+<div class="container">
+    <a href="/">На главную</a>
+    <h2>Заявки на кредит</h2>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Номер заявки</th>
+            <th>Статус</th>
+            <th>Дата подписания</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="agreement : ${creditAgreements}">
+            <td th:text="${'#' + agreement.getId()}"></td>
+
+            <td>
+                <a th:text="${'#' + agreement.application.getId()}"
+                   th:href="@{/applications/{id}(id=${agreement.application.getId()})}"></a>
+            </td>
+
+            <td th:id="'status-' + ${agreement.getId()}" th:text="${agreement.getAgreementStatus()}"></td>
+            <td th:text="${agreement.getSignDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <a th:href="@{/agreements(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Назад</a>
+        <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
+        <a th:href="@{/agreements(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Вперед &raquo;</a>
+    </div>
+</div>
+
+    <script>
+        document.querySelectorAll('[id^="status-"]').forEach(function(statusElement) {
+            if (statusElement.innerText === 'signed') {
+                statusElement.innerText = "Подписан";
+            } else {
+                statusElement.innerText = "Не подписан";
+            }
+        });
+    </script>
 </body>
 </html>

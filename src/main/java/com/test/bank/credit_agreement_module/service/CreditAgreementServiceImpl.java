@@ -5,7 +5,6 @@ import com.test.bank.credit_agreement_module.entity.CreditAgreement;
 import com.test.bank.credit_agreement_module.repo.CreditAgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,14 +29,18 @@ public class CreditAgreementServiceImpl implements CreditAgreementService{
     @Override
     public CreditAgreementDTO create(CreditAgreementDTO creditAgreementDTO) {
         CreditAgreement creditAgreement = new CreditAgreement(creditAgreementDTO);
-        creditAgreementRepository.save(creditAgreement);
-        return creditAgreementDTO;
+        CreditAgreement savedAgreement = creditAgreementRepository.save(creditAgreement);
+        CreditAgreementDTO result = new CreditAgreementDTO(savedAgreement);
+
+        System.out.println(result);
+
+        return result;
     }
 
     @Override
-    public List<CreditAgreementDTO> findAll() {
+    public List<CreditAgreementDTO> findAllPaginated(int page, int size) {
 
-        List<CreditAgreement> creditAgreements = creditAgreementRepository.findAll();
+        List<CreditAgreement> creditAgreements = creditAgreementRepository.findAllPaginated(page, size);
         List<CreditAgreementDTO> creditAgreementDTOS = new ArrayList<>();
 
         if (creditAgreements == null) {
@@ -47,5 +50,10 @@ public class CreditAgreementServiceImpl implements CreditAgreementService{
             creditAgreementDTOS.add(new CreditAgreementDTO(creditAgreement));
         }
         return creditAgreementDTOS;
+    }
+
+    @Override
+    public long count() {
+        return creditAgreementRepository.count();
     }
 }
