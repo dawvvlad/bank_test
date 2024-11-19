@@ -1,6 +1,7 @@
 package com.test.bank.credit_agreement_module.repo;
 
 import com.test.bank.credit_agreement_module.entity.CreditAgreement;
+import com.test.bank.credit_agreement_module.enums.AgreementStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,17 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
     @Autowired
     public CreditAgreementRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public void updateAgreementStatus(Long id, AgreementStatus agreementStatus) {
+
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            CreditAgreement creditAgreement = session.get(CreditAgreement.class, id);
+            creditAgreement.setStatus(agreementStatus);
+            session.getTransaction().commit();
+        }
     }
 
     @Override

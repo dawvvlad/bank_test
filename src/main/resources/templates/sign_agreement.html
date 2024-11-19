@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Подписание договора</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Договор</h2>
+        <div class="info">
+            <p th:text="'#' + ${creditAgreement.getId()}"></p>
+            <p th:text="'Имя клиента: ' + ${client.getFirstName()}"></p>
+            <p th:text="'Фамилия клиента: ' + ${client.getLastName()}"></p>
+            <p th:text="'Сумма кредита: ' + ${creditApplication.getApprovedSum()}"></p>
+            <p th:text="'Дата создания заявки: ' + ${creditApplication.getCreatedAt()}"></p>
+            <p th:text="'Статус договора: ' + ${creditAgreement.getAgreementStatus()}"></p>
+        </div>
+
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur tempus tellus ac dignissim. Vestibulum quis ligula nisl. Phasellus ut blandit tellus. Aliquam consectetur auctor ante, eget porttitor dolor lacinia ac. In ligula ligula, bibendum sed tellus et, dignissim vestibulum urna. Nullam aliquam aliquam fringilla. Nulla nec venenatis tortor. Aliquam sit amet molestie eros. Aenean sodales arcu convallis imperdiet aliquet.
+            Nulla porta facilisis erat. Nam vulputate gravida leo, ac aliquet ex interdum quis. Praesent quis leo quis libero porttitor fermentum ut eu ligula. Aenean sit amet euismod erat. Nulla at lacus sit amet quam gravida luctus quis at eros. Etiam nulla odio, rhoncus eget laoreet quis, finibus vitae velit. Quisque congue sapien a nisi eleifend euismod. Praesent a lectus malesuada, porta nibh non, mollis odio.</p>
+        <p class="text">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+
+        <form th:action="@{'/agreements/' + ${creditAgreement.getId()}}" method="post">
+            <input type="submit" value="Подписать">
+        </form>
+    </div>
+
+    <script>
+        document.querySelectorAll('[id^="marital-"]').forEach(function(statusElement) {
+            if (statusElement.innerText === 'single') {
+                statusElement.innerText = "Не женат";
+            } else {
+                statusElement.innerText = "Женат";
+            }
+        });
+    </script>
+</body>
+</html>

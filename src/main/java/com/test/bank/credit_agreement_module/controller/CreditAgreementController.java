@@ -2,13 +2,12 @@ package com.test.bank.credit_agreement_module.controller;
 
 import com.test.bank.credit_agreement_module.dto.CreditAgreementDTO;
 import com.test.bank.credit_agreement_module.entity.CreditAgreement;
+import com.test.bank.credit_agreement_module.enums.AgreementStatus;
 import com.test.bank.credit_agreement_module.service.CreditAgreementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +21,15 @@ public class CreditAgreementController {
     @Autowired
     public CreditAgreementController(CreditAgreementService creditAgreementService) {
         this.creditAgreementService = creditAgreementService;
+    }
+
+    @PostMapping("/{id}")
+    public String updateCreditAgreement(@PathVariable("id") Long id) {
+
+        if(id != null) {
+            creditAgreementService.updateCreditAgreementStatus(id, AgreementStatus.signed);
+        }
+        return "redirect:/agreements";
     }
 
     @GetMapping

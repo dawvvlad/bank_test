@@ -2,6 +2,7 @@ package com.test.bank.credit_agreement_module.service;
 
 import com.test.bank.credit_agreement_module.dto.CreditAgreementDTO;
 import com.test.bank.credit_agreement_module.entity.CreditAgreement;
+import com.test.bank.credit_agreement_module.enums.AgreementStatus;
 import com.test.bank.credit_agreement_module.repo.CreditAgreementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class CreditAgreementServiceImpl implements CreditAgreementService{
     @Autowired
     public CreditAgreementServiceImpl(CreditAgreementRepository creditAgreementRepository) {
         this.creditAgreementRepository = creditAgreementRepository;
+    }
+
+    @Override
+    public void updateCreditAgreementStatus(Long id, AgreementStatus status) {
+        creditAgreementRepository.updateAgreementStatus(id, status);
     }
 
     @Override

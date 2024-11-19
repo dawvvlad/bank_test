@@ -1,15 +1,10 @@
 package com.test.bank.core.controller;
 
-import com.test.bank.client_module.controller.ClientController;
 import com.test.bank.client_module.dto.ClientDTO;
-import com.test.bank.client_module.entity.Client;
-import com.test.bank.client_module.service.ClientService;
 import com.test.bank.core.service.DecisionProcessor;
 import com.test.bank.credit_agreement_module.dto.CreditAgreementDTO;
-import com.test.bank.credit_agreement_module.entity.CreditAgreement;
 import com.test.bank.credit_agreement_module.enums.AgreementStatus;
 import com.test.bank.credit_agreement_module.service.CreditAgreementService;
-import com.test.bank.credit_application_module.controller.CreditApplicationController;
 import com.test.bank.credit_application_module.dto.CreditApplicationDTO;
 import com.test.bank.credit_application_module.enums.ApplicationStatus;
 import com.test.bank.credit_application_module.service.CreditApplicationService;
@@ -26,21 +21,12 @@ import java.time.LocalDateTime;
 @RequestMapping("gateway")
 public class GatewayController {
 
-    private final ClientController clientController;
-    private final CreditApplicationController creditApplicationController;
-    private final ClientService clientService;
     private final CreditApplicationService creditApplicationService;
     private final CreditAgreementService creditAgreementService;
 
     @Autowired
-    public GatewayController(ClientController clientController,
-                             CreditApplicationController creditApplicationController,
-                             ClientService clientService,
-                             CreditApplicationService creditApplicationService,
+    public GatewayController(CreditApplicationService creditApplicationService,
                              CreditAgreementService creditAgreementService) {
-        this.clientController = clientController;
-        this.creditApplicationController = creditApplicationController;
-        this.clientService = clientService;
         this.creditApplicationService = creditApplicationService;
         this.creditAgreementService = creditAgreementService;
     }
@@ -76,22 +62,27 @@ public class GatewayController {
             creditApplicationDTO.setIsApproved(isApproved);
             creditApplicationDTO.setClient(clientDTO);
 
+            model.addAttribute("client", clientDTO);
+            model.addAttribute("creditApplication", creditApplicationDTO);
+
             // Credit Agreement DTO
             if(isApproved) {
                 CreditAgreementDTO creditAgreementDTO = new CreditAgreementDTO();
                 creditAgreementDTO.setAgreementStatus(AgreementStatus.not_signed);
                 creditAgreementDTO.setSignDate(LocalDateTime.now());
                 creditAgreementDTO.setApplication(creditApplicationDTO);
-                creditAgreementService.create(creditAgreementDTO);
+                CreditAgreementDTO creditAgreementDTO1 = creditAgreementService.create(creditAgreementDTO);
 
-                return "redirect:/sign_agreement";
+                model.addAttribute("creditAgreement", creditAgreementDTO1);
+
+                return "sign_agreement";
             } else {
                 creditApplicationService.create(creditApplicationDTO);
             }
-            model.addAttribute("client", clientDTO);
-            model.addAttribute("creditApplication", creditApplicationDTO);
-        } catch (InterruptedException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
+            return "error_page";
         }
         return "redirect:/clients";
     }
