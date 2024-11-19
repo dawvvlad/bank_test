@@ -1,7 +1,13 @@
 @import "main.css";
 
+
+.text-container {
+    width: 60%;
+}
+
 .info {
     margin-bottom: 20px;
+
 }
 
 .info p {

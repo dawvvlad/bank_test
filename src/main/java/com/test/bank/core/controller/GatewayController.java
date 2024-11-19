@@ -75,7 +75,7 @@ public class GatewayController {
 
                 model.addAttribute("creditAgreement", creditAgreementDTO1);
 
-                return "sign_agreement";
+                return "redirect:/agreements/" + creditAgreementDTO1.getId();
             } else {
                 creditApplicationService.create(creditApplicationDTO);
             }
