@@ -26,7 +26,9 @@
             </thead>
             <tbody>
             <tr th:each="client : ${clients}">
-                <td th:text="${'#' + client.getId()}"></td>
+                <td>
+                    <a th:text="${'#' + client.getId()}" th:href="@{/clients/{id}(id=${client.getId()})}"></a>
+                </td>
                 <td th:text="${client.getMiddleName()}"></td>
                 <td th:text="${client.getFirstName()}"></td>
                 <td th:text="${client.getLastName()}"></td>

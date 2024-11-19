@@ -3,8 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Клиент</title>
+    <link rel="stylesheet" th:href="@{/css/clients.css}"></link>
 </head>
 <body>
-    <h2 th:text="'Клиент ' + ${client.id}"></h2>
+    <div class="container">
+        <a href="/">На главную</a>
+        <h2 th:text="'Клиент #' + ${client.getId()}"></h2>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Паспортные данные</th>
+                <th>Номер телефона</th>
+                <th>Семейное положение</th>
+                <th>Адрес прописки</th>
+                <th>Номер заявки</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="'#' + ${client.getId()}"></td>
+                <td th:text="${client.getMiddleName()}"></td>
+                <td th:text="${client.getFirstName()}"></td>
+                <td th:text="${client.getLastName()}"></td>
+                <td th:text="${client.getPassportDetails()}"></td>
+                <td th:text="${client.getPhoneNumber()}"></td>
+                <td th:id="'status-' + ${client.getId()}" th:text="${client.getMaritalStatus()}"></td>
+                <td th:text="${client.getAddress()}"></td>
+                <td>
+                    <a th:text="'#' + ${client.getCreditApplicationId()}" th:href="@{/applications/{id}(id=${client.getCreditApplicationId()})}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.querySelectorAll('[id^="status-"]').forEach(function(statusElement) {
+            if (statusElement.innerText === 'single') {
+                statusElement.innerText = "Не женат/Не замужем";
+            } else {
+                statusElement.innerText = "Женат/Замужем";
+            }
+        });
+    </script>
 </body>
 </html>
