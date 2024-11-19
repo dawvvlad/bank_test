@@ -38,8 +38,6 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
         try (Session session = sessionFactory.openSession()){
             session.beginTransaction();
             session.persist(creditApplication);
-
-            System.out.println(creditApplication);
             session.getTransaction().commit();
         };
     }

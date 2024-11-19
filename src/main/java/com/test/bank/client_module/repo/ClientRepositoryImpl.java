@@ -32,7 +32,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public void save(Client client) {
+    public Client save(Client client) {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
@@ -47,10 +47,10 @@ public class ClientRepositoryImpl implements ClientRepository {
                 session.persist(client);
             }
 
-            System.out.println(client);
             session.getTransaction().commit();
         };
-    }
+            return client;
+    };
 
     @Override
     public List<Client> findAllPaginated(int page, int size) {

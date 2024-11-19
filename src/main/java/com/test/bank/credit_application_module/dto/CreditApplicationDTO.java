@@ -14,7 +14,7 @@ public class CreditApplicationDTO {
     private Double amount;
     private Double approvedSum;
     private Integer deadline;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
     private ApplicationStatus status;
     private Long agreementNumber;
 

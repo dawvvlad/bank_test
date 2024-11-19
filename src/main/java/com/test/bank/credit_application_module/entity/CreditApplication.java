@@ -36,7 +36,7 @@ public class CreditApplication {
     private int deadline;
 
     @Column(name = "date")
-    private LocalDateTime date;
+    private LocalDateTime date = LocalDateTime.now();
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

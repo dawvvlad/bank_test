@@ -8,7 +8,7 @@ import java.util.List;
 public interface ClientRepository {
     Client find(Long id);
     List<Client> findAll();
-    void save(Client client);
+    Client save(Client client);
     List<Client> findAllPaginated(int page, int size);
     Long count();
 }

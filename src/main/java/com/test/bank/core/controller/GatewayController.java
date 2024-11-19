@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("gateway")
 public class GatewayController {
+
     private final ClientController clientController;
     private final CreditApplicationController creditApplicationController;
 
