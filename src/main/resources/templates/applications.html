@@ -39,10 +39,7 @@
 
                 <td th:text="${credit.getDeadline()}"></td>
                 <td th:text="${credit.getCreatedAt()}"></td>
-                <td>
-                    <a th:text="'#' + ${credit.getAgreementNumber()}"
-                    th:href="@{/agreements/{id}(id=${credit.getAgreementNumber()})}"></a>
-                </td>
+
                 <td th:if="${credit.getAgreementNumber() != null}">
                     <a th:text="'#' + ${credit.getAgreementNumber()}"
                        th:href="@{/agreements/{id}(id=${credit.getAgreementNumber()})}"></a>
@@ -55,17 +52,17 @@
         </table>
 
         <div class="pagination">
-            <a th:href="@{/applications(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Prev</a>
+            <a th:href="@{/applications(page=${currentPage - 1}, size=${pageSize})}" th:if="${currentPage > 1}">&laquo; Назад</a>
             <span>Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
-            <a th:href="@{/applications(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Next &raquo;</a>
+            <a th:href="@{/applications(page=${currentPage + 1}, size=${pageSize})}" th:if="${currentPage < totalPages}">Вперед &raquo;</a>
         </div>
     </div>
     <script>
         document.querySelectorAll('[id^="status-"]').forEach(function(statusElement) {
             if (statusElement.innerText === 'approved') {
-                statusElement.innerText = "Подписан";
+                statusElement.innerText = "Одобрен";
             } else {
-                statusElement.innerText = "Не подписан";
+                statusElement.innerText = "Не одобрен";
             }
         });
     </script>

@@ -4,8 +4,10 @@ import com.test.bank.client_module.controller.ClientController;
 import com.test.bank.client_module.dto.ClientDTO;
 import com.test.bank.client_module.entity.Client;
 import com.test.bank.client_module.service.ClientService;
+import com.test.bank.core.service.DecisionProcessor;
 import com.test.bank.credit_application_module.controller.CreditApplicationController;
 import com.test.bank.credit_application_module.dto.CreditApplicationDTO;
+import com.test.bank.credit_application_module.enums.ApplicationStatus;
 import com.test.bank.credit_application_module.service.CreditApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,12 +45,35 @@ public class GatewayController {
     public String createUserAndApplication(ClientDTO clientDTO,
                                            CreditApplicationDTO creditApplicationDTO,
                                            Model model) {
+        try {
+            DecisionProcessor decisionProcessor = new DecisionProcessor();
+            boolean isApproved = false;
 
-        creditApplicationDTO.setClient(clientDTO);
-        creditApplicationService.create(creditApplicationDTO);
+            Thread.sleep(1000);
 
-        model.addAttribute("client", clientDTO);
-        model.addAttribute("creditApplication", creditApplicationDTO);
+            double approvedSum = decisionProcessor.makeDecision(creditApplicationDTO.getAmount());
+
+            System.out.println(approvedSum);
+
+            if(approvedSum != -1) {
+                isApproved = true;
+                creditApplicationDTO.setApprovedSum(approvedSum);
+                creditApplicationDTO.setStatus(ApplicationStatus.approved);
+            } else {
+                creditApplicationDTO.setStatus(ApplicationStatus.not_approved);
+                creditApplicationDTO.setApprovedSum(0d);
+            }
+
+            creditApplicationDTO.setIsApproved(isApproved);
+            creditApplicationDTO.setClient(clientDTO);
+            creditApplicationService.create(creditApplicationDTO);
+
+            model.addAttribute("client", clientDTO);
+            model.addAttribute("creditApplication", creditApplicationDTO);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return "redirect:/clients";
 
 
