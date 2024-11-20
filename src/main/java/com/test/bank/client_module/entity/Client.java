@@ -43,6 +43,15 @@ public class Client {
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private CreditApplication creditApplication;
 
+    @Column(name = "work_experience")
+    private Integer workExperience;
+
+    @Column(name = "job_title")
+    private String jobTitle;
+
+    @Column(name = "organization")
+    private String organization;
+
     public Client(){};
 
     public Client(ClientDTO clientDTO) {
@@ -53,5 +62,8 @@ public class Client {
         this.phoneNumber = clientDTO.getPhoneNumber();
         this.address = clientDTO.getAddress();
         this.maritalStatus = clientDTO.getMaritalStatus();
+        this.workExperience = clientDTO.getWorkExperience();
+        this.jobTitle = clientDTO.getJobTitle();
+        this.organization = clientDTO.getOrganization();
     }
 }

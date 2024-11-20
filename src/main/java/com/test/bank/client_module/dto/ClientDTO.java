@@ -2,11 +2,7 @@ package com.test.bank.client_module.dto;
 
 import com.test.bank.client_module.entity.Client;
 import com.test.bank.client_module.enums.MaritalStatus;
-import com.test.bank.credit_application_module.entity.CreditApplication;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class ClientDTO {
@@ -19,6 +15,10 @@ public class ClientDTO {
     private String address;
     private MaritalStatus maritalStatus;
     private Long creditApplicationId;
+    private Integer workExperience;
+    private String jobTitle;
+    private String organization;
+
 
     public ClientDTO() {}
     public ClientDTO(Long id,
@@ -29,6 +29,9 @@ public class ClientDTO {
                      String phoneNumber,
                      String address,
                      MaritalStatus maritalStatus,
+                     Integer workExperience,
+                     String jobTitle,
+                     String organization,
                      Long creditApplicationId) {
         this.id = id;
         this.firstName = firstName;
@@ -38,6 +41,9 @@ public class ClientDTO {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.maritalStatus = maritalStatus;
+        this.workExperience = workExperience;
+        this.jobTitle = jobTitle;
+        this.organization = organization;
         this.creditApplicationId = creditApplicationId;
     }
 
@@ -51,5 +57,8 @@ public class ClientDTO {
         this.address = client.getAddress();
         this.maritalStatus = client.getMaritalStatus();
         this.creditApplicationId = (client.getCreditApplication() == null) ? null : client.getCreditApplication().getId();
+        this.workExperience = client.getWorkExperience();
+        this.jobTitle = client.getJobTitle();
+        this.organization = client.getOrganization();
     }
 }

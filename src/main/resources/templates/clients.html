@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Clients</title>
     <link rel="stylesheet" th:href="@{/css/clients.css}"></link>
-
     <style>
         .search-form {
             display: flex;
@@ -59,6 +58,9 @@
                 <th>Номер телефона</th>
                 <th>Адрес прописки</th>
                 <th>Семейное положение</th>
+                <th>Название организации</th>
+                <th>Стаж работы</th>
+                <th>Должность</th>
                 <th>Заявки на кредит</th>
             </tr>
             </thead>
@@ -74,6 +76,11 @@
                 <td th:text="${client.getPhoneNumber()}"></td>
                 <td th:text="${client.getAddress()}"></td>
                 <td th:id="'marital-' + ${client.getId()}" th:text="${client.getMaritalStatus()}"></td>
+
+                <td th:text="${client.getOrganization()}"></td>
+                <td th:text="${client.getWorkExperience()}"></td>
+                <td th:text="${client.getJobTitle()}"></td>
+
                 <td th:if="${client.getCreditApplicationId() != null}">
                     <a th:href="@{/applications/{id}(id=${client.getCreditApplicationId()})}" th:text="'#' + ${client.getCreditApplicationId()}"></a>
                 </td>
