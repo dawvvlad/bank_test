@@ -1,5 +1,7 @@
 # Тестовое задание
 
+Приложение создано на стеке Spring Boot + MVC + Hibernate + Postgresql
+
 ## Архитектура
 Приложение реализовано на архитектуре "модульный монолит":
 1. [core](src/main/java/com/test/bank/core) - управляющий "модуль"
@@ -10,6 +12,34 @@
 ## База данных
 
 ### Таблица Users
+
+SQL
+
+```
+create table clients
+(
+    id               serial
+        primary key,
+    first_name       varchar(100)                                     not null,
+    middle_name      varchar(100)                                     not null,
+    last_name        varchar(100) default ''::character varying,
+    passport_details varchar(25)                                      not null
+        constraint clients_pk
+            unique,
+    phone_number     varchar(12)                                      not null
+        constraint clients_pk_2
+            unique,
+    marital_status   varchar(20)  default 'single'::character varying not null,
+    address          varchar(255)                                     not null,
+    work_experience  integer      default 0,
+    job_title        varchar(100) default 'worker'::character varying,
+    organization     varchar(255) default 'self-employed'::character varying
+);
+
+alter table clients
+    owner to vladdrd;
+```
+
 |id|first_name|middle_name|last_name|passport_details|phone_number|marital_status|address|work_experience|job_title|organization|
 |--|----------|-----------|---------|----------------|------------|--------------|-------|---------------|---------|------------|
 |  |          |           |         |                |            |              |       |               |         |            |
