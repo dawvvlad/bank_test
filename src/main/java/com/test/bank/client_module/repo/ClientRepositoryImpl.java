@@ -1,16 +1,11 @@
 package com.test.bank.client_module.repo;
 
-import com.test.bank.client_module.dto.ClientDTO;
 import com.test.bank.client_module.entity.Client;
-import com.test.bank.credit_application_module.entity.CreditApplication;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
