@@ -43,3 +43,48 @@ alter table clients
 |id|first_name|middle_name|last_name|passport_details|phone_number|marital_status|address|work_experience|job_title|organization|
 |--|----------|-----------|---------|----------------|------------|--------------|-------|---------------|---------|------------|
 |  |          |           |         |                |            |              |       |               |         |            |
+
+
+### Таблица credit_applications
+
+SQL
+
+```
+create table credit_applications
+(
+    id            serial
+        primary key,
+    client_id     integer          default 1
+        references clients,
+    credit_amount double precision,
+    status        varchar(20)      default 'not_approved'::character varying,
+    approved_sum  double precision default 0,
+    deadline      integer,
+    date          timestamp not null,
+    is_approved   boolean          default false
+);
+
+alter table credit_applications
+    owner to vladdrd;
+```
+
+
+
+### Таблица agreements
+
+SQL
+
+```
+create table agreements
+(
+    id            serial
+        primary key,
+    credit_app_id integer
+        references credit_applications,
+    sign_date     timestamp,
+    status        varchar(20) default 'not_signed'::character varying
+);
+
+alter table agreements
+    owner to vladdrd;
+```
