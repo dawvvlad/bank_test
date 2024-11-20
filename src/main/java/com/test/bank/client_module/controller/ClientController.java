@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/clients")
 public class ClientController {
 
     private final ClientService clientService;
@@ -19,30 +20,38 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/clients")
-    public String clients(@RequestParam(defaultValue = "1") int page,
-                          @RequestParam(defaultValue = "15") int size,
-                          Model model) {
+    @GetMapping
+    public String getClientsPage(@RequestParam(defaultValue = "1") int page,
+                                 @RequestParam(defaultValue = "15") int size,
+                                 @RequestParam(required = false) String query,
+                                 Model model) {
+        List<ClientDTO> clients;
 
-        long totalRecords = clientService.count();
-        int totalPages = (int) Math.ceil((double) totalRecords / size);
-        model.addAttribute("totalPages", totalPages);
+        if (query != null && !query.trim().isEmpty()) {
+            clients = clientService.search(query.trim());
+            model.addAttribute("searchQuery", query);
+        } else {
+            long totalRecords = clientService.count();
+            int totalPages = (int) Math.ceil((double) totalRecords / size);
+            model.addAttribute("totalPages", totalPages);
 
-        List<ClientDTO> clientDTOS = clientService.findAllPaginated(page, size);
-        model.addAttribute("clients", clientDTOS);
-        model.addAttribute("pageSize", size);
-        model.addAttribute("currentPage", page);
+            clients = clientService.findAllPaginated(page, size);
+            model.addAttribute("pageSize", size);
+            model.addAttribute("currentPage", page);
+        }
 
+        model.addAttribute("clients", clients);
         return "clients";
     }
 
-    @GetMapping("/clients/{id}")
+
+    @GetMapping("/{id}")
     public String client(Model model, @PathVariable Long id) {
         model.addAttribute("client", clientService.findById(id));
         return "client";
     }
 
-    @PostMapping("/clients")
+    @PostMapping
     public String createClient(@ModelAttribute ClientDTO clientDTO, Model model) {
         model.addAttribute("client", clientDTO);
         clientService.create(clientDTO);

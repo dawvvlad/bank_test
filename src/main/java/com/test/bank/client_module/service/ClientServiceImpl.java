@@ -65,4 +65,20 @@ public class ClientServiceImpl implements ClientService {
         return new ClientDTO(client);
     }
 
+    @Override
+    public List<ClientDTO> search(String queryStr) {
+        List<Client> clients = clientRepository.search(queryStr);
+
+        List<ClientDTO> clientDTOS = new ArrayList<>();
+
+        if(clients == null) {
+            return Collections.emptyList();
+        }
+        for (Client client : clients) {
+            clientDTOS.add(new ClientDTO(client));
+        }
+        return clientDTOS;
+    }
+
+
 }

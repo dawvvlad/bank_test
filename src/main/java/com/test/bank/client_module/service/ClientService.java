@@ -11,4 +11,5 @@ public interface ClientService {
     List<ClientDTO> findAllPaginated (int page, int size);
     Long count();
     ClientDTO findByPassportOrNumber(String passport, String number);
+    List<ClientDTO> search (String queryStr);
 }
