@@ -68,6 +68,9 @@ alter table credit_applications
     owner to vladdrd;
 ```
 
+|id|first_name|middle_name|last_name|passport_details|phone_number|marital_status|address|work_experience|job_title|organization|
+|--|----------|-----------|---------|----------------|------------|--------------|-------|---------------|---------|------------|
+|  |          |           |         |                |            |              |       |               |         |            |
 
 
 ### Таблица agreements
@@ -88,3 +91,8 @@ create table agreements
 alter table agreements
     owner to vladdrd;
 ```
+
+
+|id|credit_app_id|sign_date|status|
+|--|-------------|---------|------|
+
