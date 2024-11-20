@@ -21,6 +21,9 @@
                 <th>Номер телефона</th>
                 <th>Семейное положение</th>
                 <th>Адрес прописки</th>
+                <th>Название организации</th>
+                <th>Стаж работы</th>
+                <th>Должность</th>
                 <th>Номер заявки</th>
             </tr>
             </thead>
@@ -34,6 +37,10 @@
                 <td th:text="${client.getPhoneNumber()}"></td>
                 <td th:id="'status-' + ${client.getId()}" th:text="${client.getMaritalStatus()}"></td>
                 <td th:text="${client.getAddress()}"></td>
+
+                <td th:text="${client.getOrganization()}"></td>
+                <td th:text="${client.getWorkExperience()}"></td>
+                <td th:text="${client.getJobTitle()}"></td>
                 <td>
                     <a th:text="'#' + ${client.getCreditApplicationId()}" th:href="@{/applications/{id}(id=${client.getCreditApplicationId()})}"></a>
                 </td>
