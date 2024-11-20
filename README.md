@@ -42,7 +42,6 @@ alter table clients
 
 |id|first_name|middle_name|last_name|passport_details|phone_number|marital_status|address|work_experience|job_title|organization|
 |--|----------|-----------|---------|----------------|------------|--------------|-------|---------------|---------|------------|
-|  |          |           |         |                |            |              |       |               |         |            |
 
 
 ### Таблица credit_applications
