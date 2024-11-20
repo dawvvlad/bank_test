@@ -44,14 +44,17 @@ public class GatewayController {
             DecisionProcessor decisionProcessor = new DecisionProcessor();
             boolean isApproved = false;
 
+            // имитация принятия решения
             Thread.sleep(1000);
 
+            //случайное число одобренного кредита
             double approvedSum = decisionProcessor.makeDecision(creditApplicationDTO.getAmount());
 
             System.out.println(approvedSum);
 
             if(approvedSum != -1) {
                 isApproved = true;
+
                 // Credit Application DTO
                 creditApplicationDTO.setApprovedSum(approvedSum);
                 creditApplicationDTO.setStatus(ApplicationStatus.approved);

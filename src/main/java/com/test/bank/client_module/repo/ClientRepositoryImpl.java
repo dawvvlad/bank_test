@@ -40,6 +40,7 @@ public class ClientRepositoryImpl implements ClientRepository {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
+            //проверка, существует ли клиент
             Client existingClient = session
                     .createQuery("from Client where passportDetails = :passportDetails", Client.class)
                     .setParameter("passportDetails", client.getPassportDetails())
@@ -58,12 +59,15 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> findAllPaginated(int page, int size) {
         Session session = sessionFactory.getCurrentSession();
+
+        // возвращает заданное количество клиентов
         return session.createQuery("from Client order by id desc ", Client.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .list();
     }
 
+    // подсчет количества клиентов
     @Override
     public Long count() {
         Session session = sessionFactory.getCurrentSession();

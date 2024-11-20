@@ -53,6 +53,8 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
                 .list();
     }
 
+
+    // пагинация
     @Override
     public List<CreditAgreement> findAllPaginated(int page, int size) {
         Session session = sessionFactory.getCurrentSession();

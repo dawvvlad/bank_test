@@ -23,14 +23,15 @@ public class ClientController {
     @GetMapping
     public String getClientsPage(@RequestParam(defaultValue = "1") int page,
                                  @RequestParam(defaultValue = "15") int size,
-                                 @RequestParam(required = false) String query,
+                                 @RequestParam(required = false) String query, // запрос поиска
                                  Model model) {
         List<ClientDTO> clients;
 
+        // если есть запрос - добавить его в модель и найти клиента
         if (query != null && !query.trim().isEmpty()) {
             clients = clientService.search(query.trim());
             model.addAttribute("searchQuery", query);
-        } else {
+        } else { // иначе - вывести всех клиентов
             long totalRecords = clientService.count();
             int totalPages = (int) Math.ceil((double) totalRecords / size);
             model.addAttribute("totalPages", totalPages);

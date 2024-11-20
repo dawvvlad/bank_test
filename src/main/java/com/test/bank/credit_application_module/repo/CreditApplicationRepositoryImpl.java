@@ -46,6 +46,7 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
         return creditApplication;
     }
 
+    // пагинация
     @Override
     public List<CreditApplication> findAllPaginated(int page, int size) {
         Session session = sessionFactory.getCurrentSession();
@@ -55,6 +56,7 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
                 .list();
     }
 
+    // пагинация
     @Override
     public Long count() {
         Session session = sessionFactory.getCurrentSession();
