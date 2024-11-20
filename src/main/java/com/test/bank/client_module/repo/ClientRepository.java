@@ -12,4 +12,5 @@ public interface ClientRepository {
     List<Client> findAllPaginated(int page, int size);
     Long count();
     Client findByPassportOrNumber(String passportDetails, String number);
+    List<Client> search(String queryStr);
 }

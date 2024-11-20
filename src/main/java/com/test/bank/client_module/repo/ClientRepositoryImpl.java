@@ -5,9 +5,12 @@ import com.test.bank.client_module.entity.Client;
 import com.test.bank.credit_application_module.entity.CreditApplication;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -78,4 +81,21 @@ public class ClientRepositoryImpl implements ClientRepository {
                 .setParameter("number", number)
                 .uniqueResult();
     }
+
+    @Override
+    public List<Client> search(String queryStr) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Client c WHERE " +
+                "LOWER(c.firstName) LIKE :query OR " +
+                "LOWER(c.lastName) LIKE :query OR " +
+                "LOWER(c.middleName) LIKE :query OR " +
+                "c.phoneNumber LIKE :query OR " +
+                "c.passportDetails LIKE :query";
+
+        Query<Client> query = session.createQuery(hql, Client.class);
+        query.setParameter("query", "%" + queryStr.toLowerCase() + "%");
+        return query.list();
+    }
+
+
 }
