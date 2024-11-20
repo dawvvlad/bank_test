@@ -2,7 +2,6 @@ package com.test.bank.credit_agreement_module.controller;
 
 import com.test.bank.client_module.dto.ClientDTO;
 import com.test.bank.credit_agreement_module.dto.CreditAgreementDTO;
-import com.test.bank.credit_agreement_module.entity.CreditAgreement;
 import com.test.bank.credit_agreement_module.enums.AgreementStatus;
 import com.test.bank.credit_agreement_module.service.CreditAgreementService;
 import com.test.bank.credit_application_module.dto.CreditApplicationDTO;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller

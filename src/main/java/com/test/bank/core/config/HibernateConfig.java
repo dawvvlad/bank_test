@@ -11,6 +11,8 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
+
+    // Конфигурация SessionFactory
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -23,6 +25,7 @@ public class HibernateConfig {
         return sessionFactory;
     }
 
+    // конфигурация Transaction Manager
     @Bean
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         return new HibernateTransactionManager(sessionFactory);

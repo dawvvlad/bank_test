@@ -6,9 +6,6 @@ import com.test.bank.credit_application_module.entity.CreditApplication;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "clients")
 @Data
@@ -54,6 +51,8 @@ public class Client {
 
     public Client(){};
 
+
+    // конвертация DTO в Entity
     public Client(ClientDTO clientDTO) {
         this.firstName = clientDTO.getFirstName();
         this.middleName = clientDTO.getMiddleName();

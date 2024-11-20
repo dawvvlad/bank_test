@@ -46,9 +46,11 @@ public class ClientRepositoryImpl implements ClientRepository {
                     .setParameter("passportDetails", client.getPassportDetails())
                     .uniqueResult();
 
+
+            // если да - вернуть существующего клиента
             if (existingClient != null) {
                 return existingClient;
-            } else {
+            } else { // иначе - сохранить в базу нового
                 session.persist(client);
             }
             session.getTransaction().commit();
@@ -56,6 +58,8 @@ public class ClientRepositoryImpl implements ClientRepository {
             return client;
     };
 
+
+    // пагинация
     @Override
     public List<Client> findAllPaginated(int page, int size) {
         Session session = sessionFactory.getCurrentSession();
@@ -76,6 +80,8 @@ public class ClientRepositoryImpl implements ClientRepository {
                 .getSingleResult();
     }
 
+
+    // поиск по паспорту или номеру для проверки на уникальность в контроллере
     @Override
     public Client findByPassportOrNumber(String passportDetails, String number) {
         Session session = sessionFactory.getCurrentSession();
@@ -86,9 +92,13 @@ public class ClientRepositoryImpl implements ClientRepository {
                 .uniqueResult();
     }
 
+
+    // поиск клиента
     @Override
     public List<Client> search(String queryStr) {
         Session session = sessionFactory.getCurrentSession();
+
+        // запрос - соответствие одного из 5 параметров
         String hql = "FROM Client c WHERE " +
                 "LOWER(c.firstName) LIKE :query OR " +
                 "LOWER(c.lastName) LIKE :query OR " +
@@ -97,6 +107,8 @@ public class ClientRepositoryImpl implements ClientRepository {
                 "c.passportDetails LIKE :query";
 
         Query<Client> query = session.createQuery(hql, Client.class);
+
+        // добавление % для соответствующих строк
         query.setParameter("query", "%" + queryStr.toLowerCase() + "%");
         return query.list();
     }

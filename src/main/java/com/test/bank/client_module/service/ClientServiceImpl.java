@@ -38,6 +38,8 @@ public class ClientServiceImpl implements ClientService {
         return new ClientDTO(client);
     }
 
+
+    // пагинация
     @Override
     public List<ClientDTO> findAllPaginated(int page, int size) {
         List<Client> clients = clientRepository.findAllPaginated(page, size);

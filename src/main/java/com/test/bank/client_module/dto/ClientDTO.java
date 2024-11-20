@@ -21,6 +21,8 @@ public class ClientDTO {
 
 
     public ClientDTO() {}
+
+    // для тестов
     public ClientDTO(Long id,
                      String firstName,
                      String middleName,
@@ -47,6 +49,8 @@ public class ClientDTO {
         this.creditApplicationId = creditApplicationId;
     }
 
+
+    // конвертация Entity в DTO
     public ClientDTO(Client client) {
         this.id = client.getId();
         this.firstName = client.getFirstName();
