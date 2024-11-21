@@ -35,9 +35,6 @@ create table clients
     job_title        varchar(100) default 'worker'::character varying,
     organization     varchar(255) default 'self-employed'::character varying
 );
-
-alter table clients
-    owner to vladdrd;
 ```
 
 |id|first_name|middle_name|last_name|passport_details|phone_number|marital_status|address|work_experience|job_title|organization|
@@ -63,8 +60,6 @@ create table credit_applications
     is_approved   boolean          default false
 );
 
-alter table credit_applications
-    owner to vladdrd;
 ```
 
 |id|client_id|credit_amount|status|approved_sum|deadline|date|is_approved|
@@ -86,8 +81,6 @@ create table agreements
     status        varchar(20) default 'not_signed'::character varying
 );
 
-alter table agreements
-    owner to vladdrd;
 ```
 
 
