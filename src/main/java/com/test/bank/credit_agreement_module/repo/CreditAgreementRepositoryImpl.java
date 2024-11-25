@@ -42,14 +42,13 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
     public CreditAgreement save(CreditAgreement creditAgreement) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.getTransaction();
-        try {
-                session.persist(creditAgreement);
-                transaction.commit();
+        try (session) {
+            session.beginTransaction();
+            session.persist(creditAgreement);
+            transaction.commit();
         } catch (TransactionException e) {
-                transaction.rollback();
-                throw e;
-        } finally {
-            session.close();
+            transaction.rollback();
+            throw e;
         }
         return creditAgreement;
     }
