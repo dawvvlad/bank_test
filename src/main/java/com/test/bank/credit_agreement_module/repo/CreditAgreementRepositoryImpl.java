@@ -24,17 +24,14 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
     @Override
     public void updateAgreementStatus(Long id, AgreementStatus agreementStatus) {
         Session session = sessionFactory.openSession();
-        Transaction transaction = session.getTransaction();
-        try {
-            session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
+        try(session) {
             CreditAgreement creditAgreement = session.get(CreditAgreement.class, id);
             creditAgreement.setStatus(agreementStatus);
             transaction.commit();
         } catch (TransactionException e) {
             transaction.rollback();
             throw e;
-        } finally {
-            session.close();
         }
     }
 
