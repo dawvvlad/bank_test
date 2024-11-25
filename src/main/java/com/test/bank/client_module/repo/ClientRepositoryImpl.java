@@ -3,6 +3,8 @@ package com.test.bank.client_module.repo;
 import com.test.bank.client_module.entity.Client;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.TransactionException;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,9 +34,9 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public Client save(Client client) {
-        try(Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try(session) {
             //проверка, существует ли клиент
             Client existingClient = session
                     .createQuery("from Client where passportDetails = :passportDetails", Client.class)
@@ -48,8 +50,10 @@ public class ClientRepositoryImpl implements ClientRepository {
             } else { // иначе - сохранить в базу нового
                 session.persist(client);
             }
-            session.getTransaction().commit();
-        };
+            transaction.commit();
+        } catch (TransactionException e) {
+            transaction.rollback();
+        }
             return client;
     };
 

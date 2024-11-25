@@ -41,9 +41,8 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
     @Override
     public CreditAgreement save(CreditAgreement creditAgreement) {
         Session session = sessionFactory.openSession();
-        Transaction transaction = session.getTransaction();
+        Transaction transaction = session.beginTransaction();
         try (session) {
-            session.beginTransaction();
             session.persist(creditAgreement);
             transaction.commit();
         } catch (TransactionException e) {

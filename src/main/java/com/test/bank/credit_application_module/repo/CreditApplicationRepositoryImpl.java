@@ -3,6 +3,8 @@ package com.test.bank.credit_application_module.repo;
 import com.test.bank.credit_application_module.entity.CreditApplication;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,12 +37,15 @@ public class CreditApplicationRepositoryImpl implements CreditApplicationReposit
 
     @Override
     public CreditApplication save(CreditApplication creditApplication) {
-
-        try (Session session = sessionFactory.openSession()){
-            session.beginTransaction();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try (session){
             session.persist(creditApplication);
             session.getTransaction().commit();
-        };
+        } catch (TransactionException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
 
         System.out.println(creditApplication);
         return creditApplication;
