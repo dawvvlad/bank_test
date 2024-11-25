@@ -4,6 +4,8 @@ import com.test.bank.credit_agreement_module.entity.CreditAgreement;
 import com.test.bank.credit_agreement_module.enums.AgreementStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,20 +23,33 @@ public class CreditAgreementRepositoryImpl implements CreditAgreementRepository 
 
     @Override
     public void updateAgreementStatus(Long id, AgreementStatus agreementStatus) {
-        try (Session session = sessionFactory.openSession()) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        try {
             session.beginTransaction();
             CreditAgreement creditAgreement = session.get(CreditAgreement.class, id);
             creditAgreement.setStatus(agreementStatus);
-            session.getTransaction().commit();
+            transaction.commit();
+        } catch (TransactionException e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
     }
 
     @Override
     public CreditAgreement save(CreditAgreement creditAgreement) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            session.persist(creditAgreement);
-            session.getTransaction().commit();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.getTransaction();
+        try {
+                session.persist(creditAgreement);
+                transaction.commit();
+        } catch (TransactionException e) {
+                transaction.rollback();
+                throw e;
+        } finally {
+            session.close();
         }
         return creditAgreement;
     }
